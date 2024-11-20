@@ -1,6 +1,6 @@
 import org.cheesecakeseal.softwaretesting.SampleCalc;
-import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
