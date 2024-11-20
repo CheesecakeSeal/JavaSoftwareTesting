@@ -87,7 +87,7 @@ public class SampleCalcUnitTest {
     // Invalid Second Number Check
     @Test
     public void testInvalidSecondNumber() {
-        provideInput("10\n+\nxyz\n5\n");
+        provideInput("10\n+\nabc\n5\n");
         SampleCalc.main(new String[]{});
         assertTrue(outputStream.toString().contains("Invalid input. Please enter a valid number."));
     }
