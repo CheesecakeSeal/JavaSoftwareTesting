@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class SampleCalc {
+public class SampleCalc{
     public static void main(String[] args) {
         runCalculator(System.in, System.out);
     }
