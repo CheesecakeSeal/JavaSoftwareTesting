@@ -3,13 +3,13 @@ name: Java CI with Maven
 on:
   push:
     branches:
-      - main
+      - java1
     paths:
       - 'src/**/*.java'
       - 'test/**/*.java'
   pull_request:
     branches:
-      - main
+      - java1
     paths:
       - 'src/**/*.java'
       - 'test/**/*.java'
