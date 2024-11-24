@@ -4,11 +4,11 @@ on:
   push:
     paths:
       - 'src/main/java/org/cheesecakeseal/softwaretesting/SampleCalc*.java'
-      - 'src/test/java/org/cheesecakeseal/softwaretesting/SampleCalc*.java'
+      - 'src/test/java/org/cheesecakeseal/softwaretesting/SampleCalcApp*.java'
   pull_request:
     paths:
       - 'src/main/java/org/cheesecakeseal/softwaretesting/SampleCalc*.java'
-      - 'src/test/java/org/cheesecakeseal/softwaretesting/SampleCalc*.java'
+      - 'src/test/java/org/cheesecakeseal/softwaretesting/SampleCalcApp*.java'
 
 jobs:
   test:
