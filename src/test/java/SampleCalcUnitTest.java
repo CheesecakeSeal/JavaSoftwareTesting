@@ -9,6 +9,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+// Unit Testing for Calculator App that runs on machine
 public class SampleCalcUnitTest {
 
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
