@@ -40,7 +40,22 @@ jobs:
         run: |
           mvn clean install -DskipTests=true
 
+      - name: Start Application Server
+        run: |
+          mvn exec:java -Dexec.mainClass="org.cheesecakeseal.softwaretesting.SampleCalcApp" &
+        env:
+          SERVER_PORT: 8080 # Set any required environment variables here
+      - name: Wait for server to start
+        run: |
+          sleep 10 # Adjust this time if the server takes longer to start
+
       - name: Run Tests
         run: |
           mvn test
+
+      - name: Kill Server
+        if: always()
+        run: |
+          kill $(jobs -p)
+
 
