@@ -1,21 +1,21 @@
-name: Run SampleCalc Tests
+name: Java CI with Maven
 
 on:
   push:
+    branches:
+      - main
     paths:
-      - 'src/main/java/org/cheesecakeseal/softwaretesting/SampleCalc*.java'
-      - 'src/main/java/org/cheesecakeseal/softwaretesting/SampleCalcApp*.java'
-      - 'src/test/java/org/cheesecakeseal/softwaretesting/SampleCalc*.java'
-      - 'src/test/java/org/cheesecakeseal/softwaretesting/SampleCalcApp*.java'
+      - 'src/**/*.java'
+      - 'test/**/*.java'
   pull_request:
+    branches:
+      - main
     paths:
-      - 'src/main/java/org/cheesecakeseal/softwaretesting/SampleCalc*.java'
-      - 'src/main/java/org/cheesecakeseal/softwaretesting/SampleCalcApp*.java'
-      - 'src/test/java/org/cheesecakeseal/softwaretesting/SampleCalc*.java'
-      - 'src/test/java/org/cheesecakeseal/softwaretesting/SampleCalcApp*.java'
+      - 'src/**/*.java'
+      - 'test/**/*.java'
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,23 +25,14 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
           java-version: '17'
+          distribution: 'adoptopenjdk'
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+      - name: Build with Maven
+        run: mvn clean install -DskipTests=false
 
-      - name: Install dependencies and compile
-        run: |
-          mvn clean install -DskipTests=true
+      - name: Run unit tests with Maven
+        run: mvn test
 
-      - name: Run Tests
-        run: |
-          mvn test
-
-
+      - name: Run integration tests
+        run: mvn verify
