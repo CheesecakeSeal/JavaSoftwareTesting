@@ -17,7 +17,7 @@ public class SampleCalc {
         char operator = '0';
         boolean success = false;
 
-        output.println("---Calculator---");
+        output.println("----Calculator----");
 
         // Get the first number as a valid double
         while (!success) {
