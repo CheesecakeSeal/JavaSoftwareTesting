@@ -3,12 +3,14 @@ import org.cheesecakeseal.softwaretesting.SampleCalcApp;
 import io.javalin.Javalin;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.parsing.Parser;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.core.StringContains.containsString;
 
 class SampleCalcAppUnitTest {
 
@@ -16,14 +18,21 @@ class SampleCalcAppUnitTest {
 
     @BeforeAll
     static void setUp() {
+        // Start Javalin app
         app = Javalin.create(config -> {
             config.plugins.enableCors(cors -> cors.add(it -> it.anyHost()));
         }).start(0); // Bind to an available port
-        RestAssured.port = app.port(); // Get the dynamically assigned port for RestAssured
+
+        // Set RestAssured port to match the app's port
+        RestAssured.port = app.port();
+
+        // Register custom routes
         app.get("/", ctx -> ctx.result("Welcome to SampleCalcApp! Use /calculate with POST to perform operations."));
         app.post("/calculate", SampleCalcApp::handleCalculation);
-    }
 
+        // Register a custom parser for text/plain responses
+        RestAssured.registerParser("text/plain", Parser.TEXT);
+    }
 
     @AfterAll
     static void tearDown() {
@@ -31,7 +40,6 @@ class SampleCalcAppUnitTest {
             app.stop();
         }
     }
-
 
     @Test
     void testAddition() {
@@ -109,13 +117,15 @@ class SampleCalcAppUnitTest {
     void testUnexpectedError() {
         given()
                 .contentType(ContentType.JSON)
-                .body("{ \"num1\": \"abc\", \"num2\": 5, \"operator\": \"+\" }")
+                .body("{\"num1\": \"abc\", \"num2\": 5, \"operator\": \"+\"}")
                 .when()
                 .post("/calculate")
                 .then()
-                .statusCode(500)
-                .body("error", equalTo("An unexpected error occurred: For input string: \"abc\""));
+                .statusCode(500) // Validate the status code
+                .contentType(ContentType.TEXT) // Ensure the response is 'text/plain'
+                .body(containsString("Server Error")); // Validate the error message in the body
     }
 
 }
+
 

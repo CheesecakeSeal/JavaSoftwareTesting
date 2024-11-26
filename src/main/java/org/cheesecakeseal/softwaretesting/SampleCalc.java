@@ -82,6 +82,7 @@ public class SampleCalc{
                 return;
         }
 
+
         // Display result
         output.println("The result is: " + result);
 
