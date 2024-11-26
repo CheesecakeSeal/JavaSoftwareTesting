@@ -23,7 +23,7 @@ class SampleCalcAppUnitTest {
             config.plugins.enableCors(cors -> cors.add(it -> it.anyHost()));
         }).start(0); // Bind to an available port
 
-        // Set RestAssured port to match the app's port
+        // Set RESTAssured port to match the app's port
         RestAssured.port = app.port();
 
         // Register custom routes
@@ -34,6 +34,7 @@ class SampleCalcAppUnitTest {
         RestAssured.registerParser("text/plain", Parser.TEXT);
     }
 
+    // Stops the app when finished with tests
     @AfterAll
     static void tearDown() {
         if (app != null) {
@@ -41,6 +42,7 @@ class SampleCalcAppUnitTest {
         }
     }
 
+    // Addition Test
     @Test
     void testAddition() {
         given()
@@ -53,6 +55,7 @@ class SampleCalcAppUnitTest {
                 .body("result", equalTo(15.0f));
     }
 
+    // Subtraction Test
     @Test
     void testSubtraction() {
         given()
@@ -65,6 +68,7 @@ class SampleCalcAppUnitTest {
                 .body("result", equalTo(5.0f));
     }
 
+    // Multiplication Test
     @Test
     void testMultiplication() {
         given()
@@ -77,6 +81,7 @@ class SampleCalcAppUnitTest {
                 .body("result", equalTo(50.0f));
     }
 
+    // Division Test
     @Test
     void testDivision() {
         given()
@@ -89,6 +94,7 @@ class SampleCalcAppUnitTest {
                 .body("result", equalTo(2.0f));
     }
 
+    // Division by Zero Check
     @Test
     void testDivisionByZero() {
         given()
@@ -101,6 +107,7 @@ class SampleCalcAppUnitTest {
                 .body("error", equalTo("Division by zero is not allowed."));
     }
 
+    // Invalid Operator Check
     @Test
     void testInvalidOperator() {
         given()
@@ -113,6 +120,7 @@ class SampleCalcAppUnitTest {
                 .body("error", equalTo("Invalid operator. Valid operators are +, -, *, /."));
     }
 
+    // Unexpected Error Check
     @Test
     void testUnexpectedError() {
         given()

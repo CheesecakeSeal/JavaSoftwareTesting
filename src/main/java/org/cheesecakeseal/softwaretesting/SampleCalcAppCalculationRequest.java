@@ -1,5 +1,5 @@
 package org.cheesecakeseal.softwaretesting;
-
+// THIS IS A HELPER CLASS FOR SampleCalcApp
 // Request object
 public class SampleCalcAppCalculationRequest {
     private double num1;

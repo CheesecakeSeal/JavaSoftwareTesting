@@ -21,6 +21,7 @@ public class SampleCalcLoadTestWithMetrics {
         int incrementStep = 200; // Number of threads to add in each increment
         int runDurationMillis = 10000; // Duration to run each load increment, in milliseconds
 
+        // Threads simulate users
         for (int threadCount = incrementStep; threadCount <= maxThreads; threadCount += incrementStep) {
             System.out.println("Running load test with " + threadCount + " threads");
 

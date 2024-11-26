@@ -11,6 +11,7 @@ public class SampleCalc{
 
     public static void runCalculator(InputStream input, PrintStream output) {
         Scanner sc = new Scanner(input);
+        // Variables declared here to prevent them being global
         double num1 = 0;
         double num2 = 0;
         double result = 0;
@@ -31,7 +32,7 @@ public class SampleCalc{
             }
         }
 
-        // Get the operator as a valid char
+        // Get the operator as a valid character
         success = false;
         while (!success) {
             output.print("Enter an operator (+, -, *, /): ");

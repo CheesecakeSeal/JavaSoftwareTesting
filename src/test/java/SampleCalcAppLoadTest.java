@@ -19,7 +19,7 @@ public class SampleCalcAppLoadTest {
     private static final String BASE_URL = "http://localhost:7000";
 
     public static void main(String[] args) {
-        // Configure RestAssured
+        // Configure RESTAssured
         RestAssured.baseURI = BASE_URL;
 
         // Executor for managing threads
@@ -84,7 +84,7 @@ public class SampleCalcAppLoadTest {
         for (int i = 0; i < REQUESTS_PER_THREAD; i++) {
             long startTime = System.currentTimeMillis();
             try {
-                // Perform HTTP POST request
+                // Perform HTTP POST request. Random Inputs are used to simulate diverse calculations
                 double num1 = Math.random() * 100;
                 double num2 = Math.random() * 100;
                 char operator = randomOperator();
@@ -112,6 +112,7 @@ public class SampleCalcAppLoadTest {
         return result;
     }
 
+    // For random calculations
     private static char randomOperator() {
         char[] operators = {'+', '-', '*', '/'};
         return operators[(int) (Math.random() * operators.length)];

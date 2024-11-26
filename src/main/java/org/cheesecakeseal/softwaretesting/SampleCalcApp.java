@@ -11,10 +11,11 @@ public class SampleCalcApp {
             // Register CORS plugin to allow requests from all origins
             config.plugins.enableCors(cors -> cors.add(it -> it.anyHost()));
         }).start(7000);
+        // Static Port to avoid unnecessary bugs
 
         // Define routes
         app.get("/", ctx -> ctx.result("Welcome to SampleCalcApp! Use /calculate with POST to perform operations."));
-
+        // Excluding the Load Test within this project, you may use Apache JMeter for this
         app.post("/calculate", SampleCalcApp::handleCalculation);
 
         // Global exception handler for invalid JSON or malformed requests
@@ -62,6 +63,7 @@ public class SampleCalcApp {
         }
     }
 
+    // DTO request
     public static class CalculationRequest {
         private double num1;
         private double num2;
