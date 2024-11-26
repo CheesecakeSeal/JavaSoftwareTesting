@@ -8,7 +8,7 @@ public class SampleCalc{
     public static void main(String[] args) {
         runCalculator(System.in, System.out);
     }
-
+// Test Run
     public static void runCalculator(InputStream input, PrintStream output) {
         Scanner sc = new Scanner(input);
         double num1 = 0;
