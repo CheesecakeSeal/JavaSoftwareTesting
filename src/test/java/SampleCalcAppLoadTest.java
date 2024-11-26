@@ -120,7 +120,7 @@ public class SampleCalcAppLoadTest {
 
     private static double getSystemCpuLoad(OperatingSystemMXBean osBean) {
         if (osBean instanceof com.sun.management.OperatingSystemMXBean) {
-            return ((com.sun.management.OperatingSystemMXBean) osBean).getSystemCpuLoad();
+            return ((com.sun.management.OperatingSystemMXBean) osBean).getCpuLoad();
         }
         return -1; // Unsupported
     }
